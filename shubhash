@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Valentine ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      position: relative;
+      max-width: 400px;
+      width: 90%;
+    }
+    h1 { font-size: 2.2em; margin-bottom: 20px; }
+    p { font-size: 1.2em; margin: 8px 0; }
+    .creator { margin-top: 20px; font-size: 0.9em; opacity: 0.85; }
+    .heart {
+      position: absolute;
+      color: rgba(255,0,100,0.7);
+      font-size: 20px;
+      animation: float 5s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-200px) rotate(180deg); opacity: 0.7; }
+      100% { transform: translateY(-400px) rotate(360deg); opacity: 0; }
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 15px;
+      background-color: #ff3366;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      outline: none;
+    }
+    button:hover { transform: scale(1.1); background-color: #ff1a75; }
+
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255,255,255,0.95);
+      color: #ff3366;
+      border-radius: 20px;
+      padding: 30px 25px;
+      text-align: center;
+      z-index: 999;
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+    #popup.show { transform: translate(-50%, -50%) scale(1); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💘 Happy Valentine 💘</h1>
+    <p>From: Shubhash</p>
+    <p>To: Mariya Johnson</p>
+    <div class="creator">💖 Created by Shubhash</div>
+    <button id="valentineBtn">Will you be my Valentine? 💌</button>
+  </div>
+
+  <div id="popup">💖 I am your Valentine! 💖</div>
+
+  <audio id="bgMusic" loop autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Floating hearts background
+    const colors = ["#ff6b6b","#ff8e72","#ff69b4","#ff1a75"];
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (10 + Math.random() * 30) + "px";
+      heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+      heart.style.color = colors[Math.floor(Math.random()*colors.length)];
+      heart.innerText = "❤️";
+      document.body.appendChild(heart);
+    }
+
+    // Button click: show popup + hearts around button
+    const btn = document.getElementById("valentineBtn");
+    const popup = document.getElementById("popup");
+
+    btn.onclick = () => {
+      popup.classList.add("show");
+
+      // Hearts around button
+      for (let i = 0; i < 15; i++) {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.style.left = (btn.offsetLeft + Math.random()*btn.offsetWidth) + "px";
+        h.style.top = (btn.offsetTop + Math.random()*btn.offsetHeight) + "px";
+        h.style.fontSize = (10 + Math.random()*20)+"px";
+        h.style.animationDuration = (2 + Math.random()*3)+"s";
+        h.style.color = colors[Math.floor(Math.random()*colors.length)];
+        document.body.appendChild(h);
+      }
+    };
+  </script>
+</body>
+</html>
